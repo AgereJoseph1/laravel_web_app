@@ -1,0 +1,14 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      php: 8.2
+    commands:
+      - composer install --no-dev --optimize-autoloader
+      - npm install --production
+  build:
+    commands:
+      - cp -r public/* .
+artifacts:
+  files:
+    - '**/*'
