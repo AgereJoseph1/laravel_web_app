@@ -71,6 +71,14 @@ return [
         // ],
     ],
 
+    'guards' => [
+        'api' => [
+            'driver' => 'sanctum',
+            'provider' => 'users',
+        ],
+    ],
+    
+
     /*
     |--------------------------------------------------------------------------
     | Resetting Passwords

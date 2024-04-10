@@ -40,6 +40,12 @@ The API response is in JSON format and includes the following fields:
    - `per_page`: The number of users per page.
    - `current_page`: The current page number.
 
+
+
+**Example Request**:
+```
+GET http://laravelapp-env.eba-p3wkujp3.us-east-2.elasticbeanstalk.com/api/v1/public/users
+```
 ### Sample  Response
 
 ```json
@@ -57,6 +63,92 @@ The API response is in JSON format and includes the following fields:
     "pagination": {
         "total": 12,
         "per_page": 10,
+        "current_page": 1
+    }
+}
+```
+
+
+### Retrieve a Specific User
+
+**Endpoint**: `GET /api/v1/public/users/{id}`
+
+**Description**: Fetches details of a specific user by their ID.
+
+**Parameters**:
+
+- `id`: The unique identifier of the user.
+
+**Response**:
+
+- `user`: Object containing user details (`id`, `name`, `email`, `created_at`, `updated_at`).
+
+**Example Request**:
+```
+GET http://laravelapp-env.eba-p3wkujp3.us-east-2.elasticbeanstalk.com/api/v1/public/users/2
+```
+
+
+**Example Response**:
+
+```json
+{
+    "user": {
+        "id": 2,
+        "name": "Jane Doe",
+        "email": "janedoe@example.com",
+        "created_at": "2023-01-02T00:00:00.000000Z",
+        "updated_at": "2023-01-02T00:00:00.000000Z"
+    }
+}
+```
+
+### Retrieve All Users (Paginated)
+
+**Endpoint**: `GET /api/v1/public/users`
+
+**Description**: Fetches a paginated list of all users in the system.
+
+**Parameters**:
+
+- `per_page` (optional): Number of users to return per page. Defaults to 10.
+
+**Response**:
+
+- `users`: Array of user objects containing user details (`id`, `name`, `email`, `created_at`, `updated_at`).
+- `pagination`: Object containing pagination details.
+  - `total`: Total number of users.
+  - `per_page`: Number of users per page.
+  - `current_page`: Current page number.
+
+**Example Request**:
+```
+GET http://laravelapp-env.eba-p3wkujp3.us-east-2.elasticbeanstalk.com/api/v1/public/users?per_page=2
+```
+
+**Example Response**:
+
+```json
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "John Doe",
+            "email": "johndoe@example.com",
+            "created_at": "2023-01-01T00:00:00.000000Z",
+            "updated_at": "2023-01-01T00:00:00.000000Z"
+        },
+        {
+            "id": 2,
+            "name": "Jane Doe",
+            "email": "janedoe@example.com",
+            "created_at": "2023-01-02T00:00:00.000000Z",
+            "updated_at": "2023-01-02T00:00:00.000000Z"
+        }
+    ],
+    "pagination": {
+        "total": 100,
+        "per_page": 2,
         "current_page": 1
     }
 }

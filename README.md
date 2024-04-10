@@ -15,16 +15,17 @@ This project is a Laravel application with user registration, authentication, an
 1. Clone the repository to your local machine:
 
    ```
-   git clone <repository-url>
+   git clone https://github.com/AgereJoseph1/laravel_web_app.git
    ```
 
 2. Navigate to the project directory:
 
    ```
-   cd project-directory
+   cd project/directory 
    ```
+Note make sure to change the `projct/directory` to your project directory
 
-3. Install dependencies using Composer:
+3. Run the code below in your terminal to install the dependencies:
 
    ```
    composer install
@@ -42,7 +43,15 @@ This project is a Laravel application with user registration, authentication, an
    php artisan key:generate
    ```
 
-6. Update the `.env` file with your database credentials and other configuration settings.
+6. Update the `.env` file with your database credentials .
+```
+DB_CONNECTION = 
+DB_HOST=127.0.0.1
+DB_PORT=0000
+DB_DATABASE=
+DB_USERNAME= 
+DB_PASSWORD=
+```
 
 7. Run database migrations to create the necessary tables:
 
@@ -76,6 +85,6 @@ Please refer to the [API Documentation](api-documentation.md) for details on acc
 
 ## License
 
-This project is licensed under the [License Name](LICENSE) - see the LICENSE file for details.
+This project is licensed under the [MIT](LICENSE) - see the LICENSE file for details.
 ```
 
