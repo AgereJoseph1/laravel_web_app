@@ -85,6 +85,5 @@ Please refer to the [API Documentation](api-documentation.md) for details on acc
 
 ## License
 
-This project is licensed under the [MIT](LICENSE) - see the LICENSE file for details.
-```
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
