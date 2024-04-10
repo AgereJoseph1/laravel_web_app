@@ -76,5 +76,5 @@ Please refer to the [API Documentation](api-documentation.md) for details on acc
 
 ## License
 
-This project is licensed under the [License Name](LICENSE) - see the LICENSE file for details.
+This project is licensed under the [MIT](LICENSE) - see the LICENSE file for details
 
