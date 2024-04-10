@@ -8,33 +8,21 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
-
 class UserDataController extends Controller
 {
     public function getUserById($id)
     {
-        $validator = Validator::make(['id' => $id], [
-            'id' => 'required|integer|exists:users,id',
-        ]);
-    
-        if ($validator->fails()) {
-            return response()->json(['error' => 'User not found'], 404);
-        }
-    
         try {
-            
-            $user = User::select('id', 'name', 'email', 'created_at', 'updated_at')
-                ->findOrFail($id);
-    
+            $user = User::select('id', 'name', 'email','created_at', 'updated_at')->findOrFail($id);
             return response()->json(['user' => $user]);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Server error'], 500);
+            return response()->json(['error' => 'User not found'], 404);
         }
     }
 
     public function getAllUsers(Request $request)
     {
-        $perPage = $request->input('per_page', 10); 
+        $perPage = $request->input('per_page', 10);
         $users = User::select('id', 'name', 'email', 'created_at', 'updated_at')->paginate($perPage);
 
         return response()->json([
@@ -50,21 +38,29 @@ class UserDataController extends Controller
     // Authenticate user and generate token
     public function authenticate(Request $request)
     {
-        // Validate user credentials
-        $credentials = $request->only('email', 'password');
-        if (!Auth::attempt($credentials)) {
-            throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect.'],
-            ]);
+        try {
+            // Validate user credentials
+            $credentials = $request->only('email', 'password');
+            if (!Auth::attempt($credentials)) {
+                throw ValidationException::withMessages([
+                    'email' => ['The provided credentials are incorrect.'],
+                ]);
+            }
+
+            // Retrieve the authenticated user
+            $user = Auth::user();
+
+            // Generate token for the authenticated user
+            $token = $user->createToken('auth-token')->plainTextToken;
+
+            // Return token to the user
+            return response()->json(['token' => $token]);
+        } catch (ValidationException $e) {
+            // If validation fails (incorrect credentials), return JSON response with error messages
+            return response()->json(['errors' => $e->errors()], 422);
+        } catch (\Exception $e) {
+            // For other exceptions, return a generic error message
+            return response()->json(['error' => 'Failed to authenticate.'], 500);
         }
-
-        // Retrieve the authenticated user
-        $user = Auth::user();
-
-        // Generate token for the authenticated user
-        $token = $user->createToken('auth-token')->plainTextToken;
-
-        // Return token to the user
-        return response()->json(['token' => $token]);
     }
 }
