@@ -17,9 +17,14 @@ use App\Http\Controllers\UserDataController;
 
 // Version 1 of the API
 Route::prefix('v1')->group(function () {
-    // Public routes (no authentication required)
-    Route::prefix('public')->group(function () {
+    // Authentication route
+    Route::post('/login', [UserDataController::class, 'authenticate']);
+
+    // Protected routes (authentication required)
+    Route::middleware('auth:sanctum')->group(function () {
+        // Users routes
         Route::get('/users/{id}', [UserDataController::class, 'getUserById']);
         Route::get('/users', [UserDataController::class, 'getAllUsers']);
     });
 });
+
