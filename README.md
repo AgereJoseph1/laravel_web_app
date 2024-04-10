@@ -1,10 +1,8 @@
-
-# Laravel web application 
+# Laravel Web Application
 
 ## Introduction
 
 This project is a Laravel application with user registration, authentication, and an API endpoint to retrieve user data.
-
 
 ## Requirements
 
@@ -62,14 +60,22 @@ php artisan serve
 
 The application will be accessible at `http://localhost:8000` by default.
 
+## Deployment on AWS
+
+This Laravel web application has been deployed on AWS (Amazon Web Services) using Elastic Beanstalk, RDS and CodePipeline to automate the deployment process. Elastic Beanstalk provides a platform as a service (PaaS) to deploy and manage web applications.
+
+## Accessing the Deployed Application
+
+You can access the deployed application via the following URL:
+
+[http://laravelapp-env.eba-p3wkujp3.us-east-2.elasticbeanstalk.com/](http://laravelapp-env.eba-p3wkujp3.us-east-2.elasticbeanstalk.com/)
+
 ## API Documentation
 
 Please refer to the [API Documentation](api-documentation.md) for details on accessing and using the API.
 
-
-
 ## License
 
 This project is licensed under the [License Name](LICENSE) - see the LICENSE file for details.
-
+```
 
